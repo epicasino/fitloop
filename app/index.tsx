@@ -1,14 +1,10 @@
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite';
-// import { useEffect, useState } from 'react';
 import { user } from '../db/schema';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../drizzle/migrations';
-import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
-import backgroundImg from '../assets/images/first_visit/mitch_barrie_climbing_gym_1981.jpg';
-import FitloopLogo from '@/assets/svg/logo/FitloopLogo';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { Redirect } from 'expo-router';
-import ArrowSvg from '@/assets/svg/shapes/Arrow';
 
 const expo = openDatabaseSync('db.db');
 
@@ -20,7 +16,7 @@ export default function App() {
 
   if (error) {
     return (
-      <View style={styles.container}>
+      <View>
         <Text style={styles.text}>Migration error: {error.message}</Text>
       </View>
     );
@@ -39,13 +35,7 @@ export default function App() {
     return <Redirect href={'/home'} />;
   }
 
-  return (
-    <ImageBackground source={backgroundImg} style={styles.imageBackground}>
-      <FitloopLogo width={350} />
-      <Text style={styles.text}>Let's Get Started!</Text>
-      <ArrowSvg />
-    </ImageBackground>
-  );
+  return <Redirect href={'/register'} />;
 }
 
 const styles = StyleSheet.create({
