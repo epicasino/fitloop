@@ -1,0 +1,120 @@
+[
+  {
+    "id": 1,
+    "type": "header"
+  },
+  {
+    "id": 2,
+    "type": "register",
+    "fields": [
+      {
+        "type": "input",
+        "text": "Name"
+      },
+      {
+        "type": "dropdown",
+        "text": "Gender",
+        "options": [
+          {
+            "value": 0,
+            "text": "Male"
+          },
+          {
+            "value": 1,
+            "text": "Female"
+          }
+        ]
+      },
+      {
+        "type": "birthday",
+        "text": "Birthday"
+      },
+      {
+        "type": "height",
+        "text": "Height",
+        "ft": [3, 4, 5, 6, 7, 8, 9],
+        "in": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "register",
+    "fields": [
+      {
+        "type": "input",
+        "text": "Current Weight"
+      },
+      {
+        "type": "input",
+        "text": "Target Weight"
+      },
+      {
+        "type": "dropdown",
+        "text": "Exercise Level",
+        "options": [
+          {
+            "value": 1.2,
+            "text": "Sedentary (Little or No Exercise)"
+          },
+          {
+            "value": 1.375,
+            "text": "Lightly Active (Exercise 1-3 days/week)"
+          },
+          {
+            "value": 1.55,
+            "text": "Moderately Active (Exercise 3-5 days/week)"
+          },
+          {
+            "value": 1.725,
+            "text": "Very Active (Exercise 6-7 days/week)"
+          },
+          {
+            "value": 1.9,
+            "text": "Extra Active (Exercise 6-7 days/week & Physical Job OR 2x Training"
+          }
+        ]
+      },
+      {
+        "type": "pace",
+        "text": "Pace",
+        "options": [
+          {
+            "id": 0,
+            "paces": [
+              {
+                "type": "Relaxed",
+                "value": 250
+              },
+              {
+                "type": "Normal",
+                "value": 500
+              },
+              {
+                "type": "Strict",
+                "value": 1000
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "paces": [
+              {
+                "type": "Typical",
+                "value": 1.1
+              },
+              {
+                "type": "Moderate",
+                "value": 1.15
+              },
+              {
+                "type": "Aggresive",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
