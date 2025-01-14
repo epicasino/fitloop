@@ -185,6 +185,7 @@ function HeightComponent({ field }: { field: Field }) {
 }
 
 export default function Form({ data }: { data: iRegisterCarousel }) {
+
   return (
     <View style={slideStyles.form}>
       <Text style={slideStyles.formTextHeader}>
