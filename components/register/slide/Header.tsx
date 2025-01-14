@@ -1,7 +1,7 @@
 import React from 'react';
 import FitloopLogo from '@/assets/svg/logo/FitloopLogo';
 import ArrowSvg from '@/assets/svg/shapes/Arrow';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text } from 'react-native';
 import slideStyles from './styles';
 
 export default function Header() {

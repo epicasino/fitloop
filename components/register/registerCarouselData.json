@@ -78,10 +78,10 @@
       {
         "type": "pace",
         "text": "Pace",
-        "options": [
+        "paces": [
           {
             "id": 0,
-            "paces": [
+            "options": [
               {
                 "type": "Relaxed",
                 "value": 250
@@ -98,7 +98,7 @@
           },
           {
             "id": 1,
-            "paces": [
+            "options": [
               {
                 "type": "Typical",
                 "value": 1.1

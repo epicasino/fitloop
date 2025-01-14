@@ -63,10 +63,10 @@ export default function RegisterCarousel({
           gap: 10,
         }}
       >
-        <CircleSvg size={10} color={'grey'} />
-        <CircleSvg size={10} color={'grey'} />
-        <CircleSvg size={10} color={'grey'} />
-        <CircleSvg size={10} color={'grey'} />
+        <CircleSvg size={10} color={index === 0 ? 'white' : 'grey'} />
+        <CircleSvg size={10} color={index === 1 ? 'white' : 'grey'} />
+        <CircleSvg size={10} color={index === 2 ? 'white' : 'grey'} />
+        <CircleSvg size={10} color={index === 3 ? 'white' : 'grey'} />
       </View>
     </View>
   );
