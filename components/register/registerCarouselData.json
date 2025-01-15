@@ -6,6 +6,7 @@
   {
     "id": 2,
     "type": "register",
+    "text": "First, let's start with some basic info.",
     "fields": [
       {
         "type": "input",
@@ -40,6 +41,7 @@
   {
     "id": 3,
     "type": "register",
+    "text": "You're almost set! Just a little more info.",
     "fields": [
       {
         "type": "input",
@@ -74,44 +76,44 @@
             "text": "Extra Active (Exercise 6-7 days/week & Physical Job OR 2x Training"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "type": "pace",
+    "paces": [
       {
-        "type": "pace",
-        "text": "Pace",
-        "paces": [
+        "id": 0,
+        "options": [
           {
-            "id": 0,
-            "options": [
-              {
-                "type": "Relaxed",
-                "value": 250
-              },
-              {
-                "type": "Normal",
-                "value": 500
-              },
-              {
-                "type": "Strict",
-                "value": 1000
-              }
-            ]
+            "type": "Relaxed (0.5 lb) / week",
+            "value": 250
           },
           {
-            "id": 1,
-            "options": [
-              {
-                "type": "Typical",
-                "value": 1.1
-              },
-              {
-                "type": "Moderate",
-                "value": 1.15
-              },
-              {
-                "type": "Aggresive",
-                "value": 1
-              }
-            ]
+            "type": "Normal (1 lb) / week",
+            "value": 500
+          },
+          {
+            "type": "Strict (2.2 lb) / week",
+            "value": 1000
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "options": [
+          {
+            "type": "Typical (10% Surplus)",
+            "value": 1.1
+          },
+          {
+            "type": "Moderate (15% Surplus)",
+            "value": 1.15
+          },
+          {
+            "type": "Aggresive (20% Surplus)",
+            "value": 1.2
           }
         ]
       }

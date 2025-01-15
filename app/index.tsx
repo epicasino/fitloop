@@ -5,12 +5,15 @@ import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../drizzle/migrations';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { Redirect } from 'expo-router';
+import { clearValues } from '@/components/register/slide/asyncStorage';
 
 const expo = openDatabaseSync('db.db');
 
 const db = drizzle(expo);
 
 export default function App() {
+  clearValues();
+
   const { success, error } = useMigrations(db, migrations);
   const { data } = useLiveQuery(db.select().from(user));
 

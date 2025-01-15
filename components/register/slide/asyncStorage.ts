@@ -25,3 +25,52 @@ export const setValue = async (fieldName: string, fieldValue: string) => {
     return `Error setting ${fieldName}`;
   }
 };
+
+export const getAllValues = async () => {
+  const keys = [
+    'name',
+    'gender',
+    'birthday',
+    'feet',
+    'inch',
+    'current_weight',
+    'target_weight',
+    'exercise_level',
+    'pace',
+    'cutorbulk',
+  ];
+  const values = await AsyncStorage.multiGet(keys);
+  const objectValues = values.map((values) => {
+    let obj: { [key: string]: string | null } = {};
+    obj[values[0]] = values[1];
+    return obj;
+  });
+  const userValues: { [key: string]: string | null } = {};
+
+  for (let i = 0; i < objectValues.length; i++) {
+    Object.assign(userValues, objectValues[i]);
+  }
+
+  return userValues;
+};
+
+export const clearValues = async () => {
+  const keys = [
+    'name',
+    'gender',
+    'birthday',
+    'feet',
+    'inch',
+    'current_weight',
+    'target_weight',
+    'exercise_level',
+    'pace',
+    'cutorbulk',
+  ];
+  try {
+    await AsyncStorage.multiRemove(keys);
+  } catch (e) {
+    console.error(e);
+  }
+  console.log('Cleared Values');
+};

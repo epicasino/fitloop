@@ -1,17 +1,15 @@
 import { View, FlatList } from 'react-native';
 import registerDataJSON from './registerCarouselData.json';
 import { iUserData } from '@/types/types';
-import { Dispatch, useCallback, useRef, useState } from 'react';
+import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import Slide from './slide/Slide';
 import CircleSvg from '@/assets/svg/shapes/Circle';
+import { getAllValues, getValue } from './slide/asyncStorage';
 
-export default function RegisterCarousel({
-  userData,
-  setUserData,
-}: {
-  userData: iUserData;
-  setUserData: Dispatch<React.SetStateAction<iUserData>>;
-}) {
+export default function RegisterCarousel() {
+  const [registerData, setRegisterData] = useState(
+    registerDataJSON.slice(0, 3)
+  );
   const [index, setIndex] = useState(0);
   const indexRef = useRef(index);
   indexRef.current = index;
@@ -23,10 +21,12 @@ export default function RegisterCarousel({
       };
     }) => {
       const slideSize = event.nativeEvent.layoutMeasurement.width;
-      const index = event.nativeEvent.contentOffset.x / slideSize;
-      const roundIndex = Math.round(index);
+      const indexScroll = event.nativeEvent.contentOffset.x / slideSize;
+      const roundIndex = Math.round(indexScroll);
 
-      const distance = Math.abs(roundIndex - index);
+      const distance = Math.abs(roundIndex - indexScroll);
+
+      // console.log(roundIndex);
 
       // Prevent one pixel triggering setIndex in the middle
       // of the transition. With this we have to scroll a bit
@@ -40,11 +40,52 @@ export default function RegisterCarousel({
     []
   );
 
+  const fetchData = async () => {
+    // console.log(await getAllValues());
+    const {
+      birthday,
+      current_weight,
+      exercise_level,
+      feet,
+      inch,
+      name,
+      target_weight,
+    } = await getAllValues();
+
+    // console.log({
+    //   birthday,
+    //   current_weight,
+    //   exercise_level,
+    //   feet,
+    //   inch,
+    //   name,
+    //   target_weight,
+    // });
+
+    if (
+      birthday &&
+      current_weight &&
+      exercise_level &&
+      feet &&
+      inch &&
+      name &&
+      target_weight
+    ) {
+      // console.log('Form Filled');
+      setRegisterData([...registerData, registerDataJSON[3]]);
+    }
+  };
+
   return (
-    <View>
+    <View
+      onTouchStart={() => {
+        registerData.length !== 4 && fetchData();
+      }}
+    >
       <FlatList
         style={{ flex: 1 }}
-        data={registerDataJSON}
+        data={registerData}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
           return <Slide data={item} />;
         }}
@@ -52,6 +93,7 @@ export default function RegisterCarousel({
         horizontal
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
+        scrollEnabled={true}
       />
       <View
         style={{
@@ -66,7 +108,9 @@ export default function RegisterCarousel({
         <CircleSvg size={10} color={index === 0 ? 'white' : 'grey'} />
         <CircleSvg size={10} color={index === 1 ? 'white' : 'grey'} />
         <CircleSvg size={10} color={index === 2 ? 'white' : 'grey'} />
-        <CircleSvg size={10} color={index === 3 ? 'white' : 'grey'} />
+        {registerData.length === 4 && (
+          <CircleSvg size={10} color={index === 3 ? 'white' : 'grey'} />
+        )}
       </View>
     </View>
   );

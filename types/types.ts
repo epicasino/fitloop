@@ -1,26 +1,27 @@
 export interface iUserData {
   name: string | null;
-  gender: boolean | null;
-  birthday: Date;
-  height: number | null;
-  currentWeight: number | null;
-  targetWeight: number | null;
-  exerciseLevel: number | null;
-  pace: number | null;
-  cutOrBulk: boolean | null;
+  gender: boolean;
+  birthday: string | null;
+  height: number;
+  currentWeight: number;
+  targetWeight: number;
+  exerciseLevel: number;
+  pace?: string | null;
+  cutOrBulk?: boolean;
 }
 
 export interface iRegisterCarousel {
   id: number;
   type: string;
+  text?: string;
   fields?: Field[];
+  paces?: Pace[];
 }
 
 export interface Field {
   type: string;
   text: string;
   options?: Option[];
-  paces?: Pace[];
   ft?: number[];
   in?: number[];
 }
