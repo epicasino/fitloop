@@ -82,6 +82,7 @@
   {
     "id": 4,
     "type": "pace",
+    "text": "Final Question, and you'll be ready to begin!",
     "paces": [
       {
         "id": 0,

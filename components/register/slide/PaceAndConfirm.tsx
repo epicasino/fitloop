@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import slideStyles from './styles';
 import { getAllValues } from './asyncStorage';
-import { iUserData } from '@/types/types';
+import { iRegisterCarousel, iUserData } from '@/types/types';
 
-export default function PaceAndConfirm() {
+export default function PaceAndConfirm({ data }: { data: iRegisterCarousel }) {
   const [userData, setUserData] = useState<iUserData>();
 
   useEffect(() => {
@@ -37,5 +37,54 @@ export default function PaceAndConfirm() {
     fetchValues();
   }, []);
 
-  return <View style={slideStyles.header}></View>;
+  // console.log(data);
+
+  return (
+    <View style={slideStyles.header}>
+      <Text
+        style={{
+          color: '#fff',
+          fontSize: 32,
+          textAlign: 'center',
+          position: 'absolute',
+          top: 120,
+        }}
+      >
+        {data.text}
+      </Text>
+      {/* {userData?.cutOrBulk } */}
+    </View>
+  );
+}
+
+{
+  /* <RNPickerSelect
+        placeholder={{ label: 'in "', value: '' }}
+        items={
+          field!.in?.map((num) => {
+            return { label: `${num.toString()} "`, value: num.toString() };
+          }) || []
+        }
+        value={inch}
+        style={{
+          inputIOS: {
+            fontSize: 24,
+            width: 50,
+            height: 'auto',
+            color: '#fff',
+            textAlign: 'center',
+          },
+          placeholder: {
+            opacity: 1,
+            color: '#fff',
+          },
+        }}
+        onValueChange={async (value) => {
+          setInch(value);
+          await setValue('inch', inch);
+        }}
+        key={'inch'}
+        darkTheme
+        textInputProps={{ pointerEvents: 'none' }}
+      /> */
 }

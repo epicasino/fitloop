@@ -13,21 +13,10 @@ const db = drizzle(expo);
 
 export default function App() {
   const { data } = useLiveQuery(db.select().from(user));
-  const [userData, setUserData] = useState<iUserData>({
-    name: null,
-    gender: null,
-    birthday: new Date(),
-    height: null,
-    currentWeight: null,
-    targetWeight: null,
-    exerciseLevel: null,
-    pace: null,
-    cutOrBulk: null,
-  });
 
   return (
     <ImageBackground source={backgroundImg} style={styles.imageBackground}>
-      <RegisterCarousel userData={userData} setUserData={setUserData} />
+      <RegisterCarousel />
     </ImageBackground>
   );
 }

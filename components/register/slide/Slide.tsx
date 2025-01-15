@@ -8,5 +8,5 @@ export default function Slide({ data }: { data: iRegisterCarousel }) {
 
   if (data.type === 'register') return <Form data={data} />;
 
-  return <PaceAndConfirm />;
+  return <PaceAndConfirm data={data}/>;
 }

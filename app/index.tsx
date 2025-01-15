@@ -12,7 +12,7 @@ const expo = openDatabaseSync('db.db');
 const db = drizzle(expo);
 
 export default function App() {
-  clearValues();
+  // clearValues();
 
   const { success, error } = useMigrations(db, migrations);
   const { data } = useLiveQuery(db.select().from(user));
