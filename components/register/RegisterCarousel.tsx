@@ -52,16 +52,6 @@ export default function RegisterCarousel() {
       target_weight,
     } = await getAllValues();
 
-    // console.log({
-    //   birthday,
-    //   current_weight,
-    //   exercise_level,
-    //   feet,
-    //   inch,
-    //   name,
-    //   target_weight,
-    // });
-
     if (
       birthday &&
       current_weight &&
@@ -87,7 +77,7 @@ export default function RegisterCarousel() {
         data={registerData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
-          return <Slide data={item} />;
+          return <Slide data={item} index={index}/>;
         }}
         pagingEnabled
         horizontal

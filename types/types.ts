@@ -6,7 +6,7 @@ export interface iUserData {
   currentWeight: number;
   targetWeight: number;
   exerciseLevel: number;
-  pace?: string | null;
+  pace?: number | null;
   cutOrBulk?: boolean;
 }
 

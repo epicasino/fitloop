@@ -4,8 +4,6 @@ import { openDatabaseSync } from 'expo-sqlite';
 import { user } from '../../db/schema';
 import backgroundImg from '@/assets/images/first_visit/mitch_barrie_climbing_gym_1981.jpg';
 import RegisterCarousel from '@/components/register/RegisterCarousel';
-import { useState } from 'react';
-import { iUserData } from '@/types/types';
 
 const expo = openDatabaseSync('db.db');
 
