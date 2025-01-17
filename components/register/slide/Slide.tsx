@@ -1,4 +1,4 @@
-import { iRegisterCarousel, iUserData } from '@/types/types';
+import { iRegisterCarousel } from '@/types/types';
 import Header from './Header';
 import Form from './Form';
 import PaceAndConfirm from './PaceAndConfirm';

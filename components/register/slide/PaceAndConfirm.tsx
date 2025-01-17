@@ -1,7 +1,7 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import slideStyles from './styles';
-import { getAllValues, setValue } from './asyncStorage';
+import slideStyles from './styles/styles';
+import { getAllValues } from './functions/asyncStorage';
 import { iRegisterCarousel, iUserData } from '@/types/types';
 import RNPickerSelect from 'react-native-picker-select';
 

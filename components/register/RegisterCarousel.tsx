@@ -1,10 +1,9 @@
 import { View, FlatList } from 'react-native';
 import registerDataJSON from './registerCarouselData.json';
-import { iUserData } from '@/types/types';
-import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Slide from './slide/Slide';
-import CircleSvg from '@/assets/svg/shapes/Circle';
-import { getAllValues, getValue } from './slide/asyncStorage';
+import { getAllValues, getValue } from './slide/functions/asyncStorage';
+import PageIndex from './slide/PageIndex';
 
 export default function RegisterCarousel() {
   const [registerData, setRegisterData] = useState(
@@ -77,7 +76,7 @@ export default function RegisterCarousel() {
         data={registerData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
-          return <Slide data={item} index={index}/>;
+          return <Slide data={item} index={index} />;
         }}
         pagingEnabled
         horizontal
@@ -85,23 +84,7 @@ export default function RegisterCarousel() {
         onScroll={onScroll}
         scrollEnabled={true}
       />
-      <View
-        style={{
-          flex: 1,
-          position: 'absolute',
-          bottom: 20,
-          flexDirection: 'row',
-          alignSelf: 'center',
-          gap: 10,
-        }}
-      >
-        <CircleSvg size={10} color={index === 0 ? 'white' : 'grey'} />
-        <CircleSvg size={10} color={index === 1 ? 'white' : 'grey'} />
-        <CircleSvg size={10} color={index === 2 ? 'white' : 'grey'} />
-        {registerData.length === 4 && (
-          <CircleSvg size={10} color={index === 3 ? 'white' : 'grey'} />
-        )}
-      </View>
+      <PageIndex index={index} registerData={registerData} />
     </View>
   );
 }
