@@ -3,9 +3,9 @@ import { openDatabaseSync } from 'expo-sqlite';
 import { user } from '../db/schema';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../drizzle/migrations';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { Text, View } from 'react-native';
 import { Redirect } from 'expo-router';
-import { clearValues } from '@/components/register/slide/functions/asyncStorage';
+import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 
 const expo = openDatabaseSync('db.db');
 
@@ -14,11 +14,14 @@ const db = drizzle(expo);
 export default function App() {
   const { success, error } = useMigrations(db, migrations);
   const { data } = useLiveQuery(db.select().from(user));
+  useDrizzleStudio(expo);
 
   if (error) {
     return (
       <View>
-        <Text style={styles.text}>Migration error: {error.message}</Text>
+        <Text style={{ color: '#fff', fontSize: 64, textAlign: 'center' }}>
+          Migration error: {error.message}
+        </Text>
       </View>
     );
   }
@@ -38,24 +41,3 @@ export default function App() {
 
   return <Redirect href={'/register'} />;
 }
-
-const styles = StyleSheet.create({
-  imageBackground: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    resizeMode: 'cover',
-    width: '100%',
-    height: '100%',
-    gap: 60,
-  },
-  text: {
-    color: '#fff',
-    fontSize: 64,
-    textAlign: 'center',
-  },
-  logo: {
-    width: 200,
-    height: 100,
-  },
-});

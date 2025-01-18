@@ -4,6 +4,8 @@ import slideStyles from './styles/styles';
 import { getAllValues } from './functions/asyncStorage';
 import { iRegisterCarousel, iUserData } from '@/types/types';
 import RNPickerSelect from 'react-native-picker-select';
+import register from './functions/register';
+import { Redirect } from 'expo-router';
 
 function SelectorComponent({
   cutOrBulk,
@@ -67,6 +69,8 @@ export default function PaceAndConfirm({
 }) {
   const [userData, setUserData] = useState<iUserData>();
 
+  const [redirect, setRedirect] = useState(false);
+
   useEffect(() => {
     const fetchValues = async () => {
       const {
@@ -81,14 +85,14 @@ export default function PaceAndConfirm({
       } = await getAllValues();
       const cutOrBulk = parseInt(current_weight!) < parseInt(target_weight!);
       const parsedData: iUserData = {
-        birthday,
+        birthday: birthday!,
         gender: gender === 'false' ? false : true,
         currentWeight: parseInt(current_weight!),
         targetWeight: parseInt(target_weight!),
-        exerciseLevel: parseInt(exercise_level!),
+        exerciseLevel: parseFloat(exercise_level!),
         height: parseInt(feet!) * 12 + parseInt(inch!),
-        name,
-        pace: null,
+        name: name!,
+        pace: undefined,
         cutOrBulk,
       };
       setUserData(parsedData);
@@ -140,6 +144,14 @@ export default function PaceAndConfirm({
             opacity: !userData?.pace ? 0.5 : 1,
           }}
           disabled={!userData?.pace ? true : false}
+          onPress={async () => {
+            if (userData) {
+              const newUser = await register(userData);
+              if (newUser) {
+                setRedirect(true);
+              }
+            }
+          }}
         >
           <Text
             style={{
@@ -153,6 +165,7 @@ export default function PaceAndConfirm({
           </Text>
         </Pressable>
       </View>
+      {redirect && <Redirect href={'/home'} />}
     </View>
   );
 }

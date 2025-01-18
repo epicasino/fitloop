@@ -1,12 +1,12 @@
 export interface iUserData {
-  name: string | null;
+  name: string;
   gender: boolean;
-  birthday: string | null;
+  birthday: string;
   height: number;
   currentWeight: number;
   targetWeight: number;
   exerciseLevel: number;
-  pace?: number | null;
+  pace?: number;
   cutOrBulk?: boolean;
 }
 

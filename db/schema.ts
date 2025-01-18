@@ -4,11 +4,10 @@ import { int, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 export const user = sqliteTable('user_table', {
   id: int().primaryKey({ autoIncrement: true }),
   name: text().notNull(),
-  gender: int({ mode: 'boolean' }),
+  gender: int({ mode: 'boolean' }).notNull(),
   birthday: text().notNull(),
   exerciseLevel: int().notNull(),
   height: int().notNull(),
-  age: int().notNull(),
   cutOrBulk: int({ mode: 'boolean' }).notNull(),
   currentWeight: int().notNull(),
   targetWeight: int().notNull(),
