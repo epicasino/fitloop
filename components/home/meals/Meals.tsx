@@ -5,6 +5,7 @@ import CurrentCalories from './CurrentCalories';
 import LatestMeal from './LatestMeal';
 import { DayContext } from '../contexts';
 import PlusBtn from '@/assets/svg/shapes/PlusBtn';
+import { useRouter } from 'expo-router';
 
 export default function Meals({
   mealsData,
@@ -18,6 +19,7 @@ export default function Meals({
   }[];
 }) {
   const dayId = useContext(DayContext);
+  const router = useRouter();
   return (
     dayId && (
       <View style={mealsAndExerciseStyles.container}>
@@ -32,6 +34,9 @@ export default function Meals({
             position: 'absolute',
             bottom: 10,
             right: 10,
+          }}
+          onPress={() => {
+            router.push('/home/meals');
           }}
         >
           <PlusBtn size={35} />
