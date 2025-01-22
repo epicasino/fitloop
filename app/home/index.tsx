@@ -4,11 +4,13 @@ import Header from '@/components/home/Header';
 import Meals from '@/components/home/meals/Meals';
 import StatusMessage from '@/components/home/StatusMessage';
 import { homeStyles } from '@/components/home/styles/styles';
-import { day, user } from '@/db/schema';
+import { day, exercise, meal, user } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite';
 import { View } from 'react-native';
+import { DayContext } from '@/components/home/contexts';
+import Exercises from '@/components/home/exercises/Exercises';
 
 const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
@@ -26,9 +28,16 @@ export default function Index() {
   const dayData = useLiveQuery(
     db.select().from(day).where(eq(day.date, today)).limit(1)
   ).data[0];
+  const mealsData = useLiveQuery(
+    db.select().from(meal).where(eq(day.date, today))
+  ).data;
+  const exerciseData = useLiveQuery(
+    db.select().from(exercise).where(eq(day.date, today))
+  ).data;
+
+  // console.log(mealsData);
 
   if (!dayData && userData) {
-    // console.log(userData);
     const createNewDay = async () => {
       const bmr = calculateBmr(
         userData.gender,
@@ -52,32 +61,35 @@ export default function Index() {
   }
   // console.log(dayData);
   // console.log(userData);
-
-  return userData && dayData ? (
-    <View style={homeStyles.container}>
-      <Header name={userData.name} />
-      <StatusMessage />
-      <View>
-        <View style={{ width: '100%', flexDirection: 'row', gap: 20 }}>
-          <Meals />
-          <Meals />
+  if (userData && dayData && mealsData && exerciseData) {
+    return (
+      <DayContext.Provider value={dayData}>
+        <View style={homeStyles.container}>
+          <Header name={userData.name} />
+          <StatusMessage />
+          <View>
+            <View style={{ width: '100%', flexDirection: 'row', gap: 20 }}>
+              <Meals mealsData={mealsData} />
+              <Exercises exerciseData={exerciseData} />
+            </View>
+          </View>
+          {/* <Pressable
+          style={{ backgroundColor: 'grey', padding: 15 }}
+          onPress={async () => {
+            await db.delete(day);
+            await db.delete(user);
+            setReset(true);
+          }}
+        >
+          <Text style={{ color: '#fff' }}>Delete Data</Text>
+        </Pressable>
+        {reset && <Redirect href={'/'} />} */}
         </View>
-      </View>
-      {/* <Pressable
-        style={{ backgroundColor: 'grey', padding: 15 }}
-        onPress={async () => {
-          await db.delete(day);
-          await db.delete(user);
-          setReset(true);
-        }}
-      >
-        <Text style={{ color: '#fff' }}>Delete Data</Text>
-      </Pressable>
-      {reset && <Redirect href={'/'} />} */}
-    </View>
-  ) : (
-    <View></View>
-  );
+      </DayContext.Provider>
+    );
+  } else {
+    return <View></View>;
+  }
 }
 
 // **Calorie Deficit = TDEE − Calories Consumed**

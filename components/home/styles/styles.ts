@@ -49,6 +49,15 @@ export const mealsAndExerciseStyles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 'medium',
+    fontWeight: '600',
+    paddingBottom: 10,
+  },
+  currentCalories: {
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  calorieIntake: {
+    fontSize: 32,
+    fontWeight: '500',
   },
 });
