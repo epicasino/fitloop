@@ -13,7 +13,7 @@ import { DayContext } from '@/components/home/contexts';
 import Exercises from '@/components/home/exercises/Exercises';
 import createNewDay from '@/db/mutations/createNewDay';
 
-const expo = openDatabaseSync('db.db');
+const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
 const db = drizzle(expo);
 

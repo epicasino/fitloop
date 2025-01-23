@@ -1,7 +1,9 @@
 import { user } from '@/db/schema';
-import { iUserData } from '@/types/types';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite';
+
+const expo = openDatabaseSync('db.db');
+const db = drizzle(expo);
 
 export default async function register(userData: any) {
   const {
@@ -15,8 +17,6 @@ export default async function register(userData: any) {
     targetWeight,
     pace,
   } = userData;
-  const expo = openDatabaseSync('db.db');
-  const db = drizzle(expo);
 
   // console.log(birthday);
 

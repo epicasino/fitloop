@@ -7,7 +7,7 @@ import { Redirect } from 'expo-router';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { openDatabaseSync } from 'expo-sqlite';
 
-const expo = openDatabaseSync('db.db');
+const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
 const db = drizzle(expo);
 
