@@ -14,6 +14,7 @@ export default function Meals({
     id: number;
     time: string;
     calories: number;
+    title: string;
     notes: string | null;
     dayId: number | null;
   }[];

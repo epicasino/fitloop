@@ -1,0 +1,1 @@
+ALTER TABLE `meals_table` ADD `title` text NOT NULL;

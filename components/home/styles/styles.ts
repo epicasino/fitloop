@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 export const homeStyles = StyleSheet.create({
   container: {
@@ -59,5 +61,23 @@ export const mealsAndExerciseStyles = StyleSheet.create({
   calorieIntake: {
     fontSize: 32,
     fontWeight: '500',
+  },
+});
+
+export const mealsPageStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    backgroundColor: '#000000',
+    padding: 20,
+    paddingTop: 75,
+    gap: 20,
+  },
+  weekSpreadContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

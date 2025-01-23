@@ -1,11 +1,11 @@
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
-import { openDatabaseSync } from 'expo-sqlite';
 import { user } from '../db/schema';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../drizzle/migrations';
 import { Text, View } from 'react-native';
 import { Redirect } from 'expo-router';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
+import { openDatabaseSync } from 'expo-sqlite';
 
 const expo = openDatabaseSync('db.db');
 

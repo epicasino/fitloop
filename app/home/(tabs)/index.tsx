@@ -1,5 +1,5 @@
-import { calculateBmr } from '@/components/home/functions/calculations';
-import { createDay } from '@/components/home/functions/mutations';
+import { calculateBmr } from '@/functions/calculations';
+import { createDay } from '@/db/mutations/mutations';
 import Header from '@/components/home/Header';
 import Meals from '@/components/home/meals/Meals';
 import StatusMessage from '@/components/home/StatusMessage';
@@ -11,19 +11,16 @@ import { openDatabaseSync } from 'expo-sqlite';
 import { View } from 'react-native';
 import { DayContext } from '@/components/home/contexts';
 import Exercises from '@/components/home/exercises/Exercises';
+import createNewDay from '@/db/mutations/createNewDay';
 
-const expo = openDatabaseSync('db.db', { enableChangeListener: true });
+const expo = openDatabaseSync('db.db');
 
 const db = drizzle(expo);
 
 export default function Index() {
   // const [reset, setReset] = useState(false);
 
-  const today = new Date().toLocaleDateString('en-US', {
-    month: 'numeric',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const today = new Date().toDateString();
   const userData = useLiveQuery(db.select().from(user)).data[0];
   const dayData = useLiveQuery(
     db.select().from(day).where(eq(day.date, today)).limit(1)
@@ -38,26 +35,7 @@ export default function Index() {
   // console.log(mealsData);
 
   if (!dayData && userData) {
-    const createNewDay = async () => {
-      const bmr = calculateBmr(
-        userData.gender,
-        userData.currentWeight,
-        userData.height,
-        userData.birthday
-      );
-      const tdee = bmr * userData.exerciseLevel;
-      // true is bulk, false is cut
-      const calorieTarget = userData.cutOrBulk
-        ? tdee * userData.pace
-        : tdee - userData.pace;
-      await createDay({
-        date: today,
-        calorieTarget,
-        userId: userData.id,
-        db,
-      });
-    };
-    createNewDay();
+    createNewDay(userData, today);
   }
   // console.log(dayData);
   // console.log(userData);

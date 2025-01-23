@@ -37,6 +37,7 @@ export const dayRelations = relations(day, ({ one, many }) => ({
 
 export const meal = sqliteTable('meals_table', {
   id: int().primaryKey({ autoIncrement: true }),
+  title: text().notNull(),
   time: text().notNull(),
   calories: int().notNull(),
   notes: text(),

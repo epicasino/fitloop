@@ -1,17 +1,8 @@
 import { StyleSheet, ImageBackground } from 'react-native';
-import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
-import { openDatabaseSync } from 'expo-sqlite';
-import { user } from '../../db/schema';
 import backgroundImg from '@/assets/images/first_visit/mitch_barrie_climbing_gym_1981.jpg';
 import RegisterCarousel from '@/components/register/RegisterCarousel';
 
-const expo = openDatabaseSync('db.db');
-
-const db = drizzle(expo);
-
 export default function App() {
-  const { data } = useLiveQuery(db.select().from(user));
-
   return (
     <ImageBackground source={backgroundImg} style={styles.imageBackground}>
       <RegisterCarousel />
