@@ -1,5 +1,6 @@
 import createNewDay from '@/db/mutations/createNewDay';
 import { day, meal, user } from '@/db/schema';
+import initializeWeek from '@/functions/initializeWeek';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite';
@@ -8,18 +9,6 @@ import { useEffect, useState } from 'react';
 const expo = openDatabaseSync('db.db');
 
 const db = drizzle(expo);
-
-function initializeWeek(date: string) {
-  // https://medium.com/@quynh.totuan/how-to-get-the-current-week-in-javascript-9e64d45a9a08
-  let initWeek = [];
-
-  for (let i = 0; i < 7; i++) {
-    let first = new Date(date).getDate() - new Date(date).getDay() + i;
-    let day = new Date(new Date(date).setDate(first)).toDateString();
-    initWeek.push(day);
-  }
-  return initWeek;
-}
 
 export default function useWeekColors(selectedDate: string) {
   const weekStringArr = initializeWeek(selectedDate);
@@ -32,6 +21,10 @@ export default function useWeekColors(selectedDate: string) {
 
   useEffect(() => {
     const generateWeek = async () => {
+      const userData = await db
+        .select()
+        .from(user)
+        .then((data) => data[0]);
       const generatedWeek = await Promise.all(
         weekStringArr.map(async (dayStr) => {
           let dayData = await db
@@ -59,7 +52,11 @@ export default function useWeekColors(selectedDate: string) {
             date: dayData!.date,
             colors:
               mealData.length !== 0
-                ? dayData!.calorieIntake <= dayData!.calorieTarget
+                ? userData.cutOrBulk
+                  ? dayData!.calorieIntake >= dayData!.calorieTarget
+                    ? '#29FF52'
+                    : '#DE2154'
+                  : dayData!.calorieIntake <= dayData!.calorieTarget
                   ? '#29FF52'
                   : '#DE2154'
                 : '#fff',

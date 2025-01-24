@@ -1,7 +1,7 @@
 import CircleSvg from '@/assets/svg/shapes/Circle';
 import React, { useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
-import { mealsPageStyles } from '../home/styles/styles';
+import { mealsPageStyles } from './styles/styles';
 import useWeekColors from '@/hooks/useWeekColors';
 
 export default function WeekSpread({
