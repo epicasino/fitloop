@@ -20,4 +20,28 @@ export const mealsPageStyles = StyleSheet.create({
     backgroundColor: '#333333',
     borderRadius: 15,
   },
+  newMealBtnContainer: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#2B2B2B',
+    borderRadius: 15,
+    gap: 5,
+  },
+  modalContainer: {
+    width: '95%',
+    height: '70%',
+    alignItems: 'center',
+    backgroundColor: '#181818',
+    borderRadius: 15,
+    padding: 20,
+  },
+  modalHeaderText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 32,
+  },
 });
