@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Text, View } from 'react-native';
 import ProgressBar from '@/components/meals/ProgressBar';
 import NewMealBtn from '@/components/meals/NewMealBtn';
-import ModalContent from '@/components/meals/ModalContent';
+import ModalContent from '@/components/meals/modal/ModalContent';
 
 const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
@@ -57,7 +57,7 @@ export default function MealsPage() {
           }}
           transparent={true}
         >
-          <ModalContent setModal={setModal}/>
+          <ModalContent setModal={setModal} />
         </Modal>
         <Header date={selectedDate} />
         <WeekSpread

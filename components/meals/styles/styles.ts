@@ -35,13 +35,26 @@ export const mealsPageStyles = StyleSheet.create({
     width: '95%',
     height: '70%',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#181818',
     borderRadius: 15,
     padding: 20,
+    gap: 20,
   },
   modalHeaderText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: 24,
+  },
+  modalBtn: {
+    height: 60,
+    width: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+  },
+  modalBtnText: {
+    color: '#fff',
+    fontSize: 22,
   },
 });
