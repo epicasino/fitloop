@@ -10,6 +10,7 @@ import { Modal, Text, View } from 'react-native';
 import ProgressBar from '@/components/meals/ProgressBar';
 import NewMealBtn from '@/components/meals/NewMealBtn';
 import ModalContent from '@/components/meals/modal/ModalContent';
+import LoggedMeals from '@/components/meals/LoggedMeals';
 
 const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
@@ -92,6 +93,7 @@ export default function MealsPage() {
           meals={mealsData.length}
         />
         <NewMealBtn setModal={setModal} />
+        <LoggedMeals />
         <Text style={{ color: '#fff' }}>
           {dayData.date} Meals: {mealsData.length}
         </Text>
