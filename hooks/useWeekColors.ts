@@ -10,7 +10,7 @@ const expo = openDatabaseSync('db.db');
 
 const db = drizzle(expo);
 
-export default function useWeekColors(selectedDate: string) {
+export default function useWeekColors(selectedDate: string, modal: boolean) {
   const weekStringArr = initializeWeek(selectedDate);
   const [week, setWeek] = useState<
     Array<{
@@ -66,7 +66,7 @@ export default function useWeekColors(selectedDate: string) {
       return generatedWeek;
     };
     generateWeek().then((data) => setWeek(data));
-  }, []);
+  }, [modal]);
 
   return week;
 }

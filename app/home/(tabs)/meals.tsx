@@ -27,6 +27,16 @@ export default function MealsPage() {
     calorieIntake: number;
     userId: number | null;
   }>();
+  const [mealsData, setMealsData] = useState<
+    {
+      id: number;
+      title: string;
+      time: string;
+      calories: number;
+      notes: string | null;
+      dayId: number | null;
+    }[]
+  >();
 
   useEffect(() => {
     const generateDayData = async () => {
@@ -35,18 +45,28 @@ export default function MealsPage() {
         .from(day)
         .where(eq(day.date, selectedDate))
         .then((data) => data[0]);
+      // console.log(fetchedDay);
       setDayData(fetchedDay);
     };
     generateDayData();
-  }, [selectedDate]);
+  }, [selectedDate, modal]);
 
-  const mealsData = useLiveQuery(
-    db.select().from(meal).where(eq(day.date, selectedDate))
-  ).data;
+  useEffect(() => {
+    const generateMealData = async () => {
+      const fetchedMeals = await db
+        .select()
+        .from(meal)
+        .where(eq(meal.dayId, dayData!.id));
+      setMealsData(fetchedMeals);
+    };
+    generateMealData();
+  }, [dayData, modal]);
 
   if (dayData && mealsData && userData) {
     // console.log(dayData.date);
-    // console.log(dayData);
+    // console.log(dayData)
+    // console.log(mealsData);
+
     return (
       <View style={mealsPageStyles.container}>
         <Modal
@@ -57,12 +77,13 @@ export default function MealsPage() {
           }}
           transparent={true}
         >
-          <ModalContent setModal={setModal} />
+          <ModalContent setModal={setModal} dayData={dayData} />
         </Modal>
         <Header date={selectedDate} />
         <WeekSpread
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
+          modal={modal}
         />
         <ProgressBar
           calorieIntake={dayData.calorieIntake}
@@ -71,7 +92,9 @@ export default function MealsPage() {
           meals={mealsData.length}
         />
         <NewMealBtn setModal={setModal} />
-        <Text style={{ color: '#fff' }}>{dayData.date}</Text>
+        <Text style={{ color: '#fff' }}>
+          {dayData.date} Meals: {mealsData.length}
+        </Text>
       </View>
     );
   } else return <View style={mealsPageStyles.container}></View>;

@@ -41,7 +41,7 @@ export const meal = sqliteTable('meals_table', {
   time: text().notNull(),
   calories: int().notNull(),
   notes: text(),
-  dayId: int(),
+  dayId: int().notNull(),
 });
 
 export const exercise = sqliteTable('exercises_table', {
@@ -49,5 +49,5 @@ export const exercise = sqliteTable('exercises_table', {
   exerciseType: text().notNull(),
   duration: int().notNull(),
   caloriesBurned: int().notNull(),
-  dayId: int(),
+  dayId: int().notNull(),
 });

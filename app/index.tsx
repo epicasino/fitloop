@@ -1,5 +1,5 @@
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
-import { user } from '../db/schema';
+import { day, meal, user } from '../db/schema';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../drizzle/migrations';
 import { Text, View } from 'react-native';
@@ -11,7 +11,14 @@ const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
 const db = drizzle(expo);
 
+// async function clearData() {
+// await db.delete(user);
+// await db.delete(day);
+// await db.delete(meal);
+// }
+
 export default function App() {
+  // clearData();
   const { success, error } = useMigrations(db, migrations);
   const { data } = useLiveQuery(db.select().from(user));
   useDrizzleStudio(expo);

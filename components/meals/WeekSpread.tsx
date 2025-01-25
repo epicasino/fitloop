@@ -7,11 +7,13 @@ import useWeekColors from '@/hooks/useWeekColors';
 export default function WeekSpread({
   selectedDate,
   setSelectedDate,
+  modal,
 }: {
   selectedDate: string;
   setSelectedDate: React.Dispatch<React.SetStateAction<string>>;
+  modal: boolean;
 }) {
-  const week = useWeekColors(selectedDate);
+  const week = useWeekColors(selectedDate, modal);
 
   // console.log(week);
 
@@ -31,7 +33,7 @@ export default function WeekSpread({
             <View style={{ opacity: dateObj.date === selectedDate ? 1 : 0.2 }}>
               <CircleSvg
                 size={dateObj.date === selectedDate ? 50 : 40}
-                color="#fff"
+                color={dateObj.colors}
               />
             </View>
             <Text style={{ color: '#fff' }}>

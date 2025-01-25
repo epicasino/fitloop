@@ -33,7 +33,7 @@ export const mealsPageStyles = StyleSheet.create({
   },
   modalContainer: {
     width: '95%',
-    height: '70%',
+    height: 620,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#181818',
