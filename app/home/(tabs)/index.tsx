@@ -1,5 +1,3 @@
-import { calculateBmr } from '@/functions/calculations';
-import { createDay } from '@/db/mutations/mutations';
 import Header from '@/components/home/Header';
 import Meals from '@/components/home/meals/Meals';
 import StatusMessage from '@/components/home/StatusMessage';
@@ -11,35 +9,55 @@ import { openDatabaseSync } from 'expo-sqlite';
 import { View } from 'react-native';
 import { DayContext } from '@/components/home/contexts';
 import Exercises from '@/components/home/exercises/Exercises';
-import createNewDay from '@/db/mutations/createNewDay';
+import { useEffect, useState } from 'react';
 
 const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
 const db = drizzle(expo);
 
 export default function Index() {
-  // const [reset, setReset] = useState(false);
-
   const today = new Date().toDateString();
   const userData = useLiveQuery(db.select().from(user)).data[0];
-  const dayData = useLiveQuery(
-    db.select().from(day).where(eq(day.date, today)).limit(1)
-  ).data[0];
-  const mealsData = useLiveQuery(
-    db.select().from(meal).where(eq(day.date, today))
-  ).data;
-  const exerciseData = useLiveQuery(
-    db.select().from(exercise).where(eq(day.date, today))
-  ).data;
+  const dayData = useLiveQuery(db.select().from(day).where(eq(day.date, today)))
+    .data[0];
+  const [mealsData, setMealsData] = useState<
+    {
+      id: number;
+      title: string;
+      time: string;
+      calories: number;
+      notes: string | null;
+      dayId: number;
+    }[]
+  >();
+  const [exerciseData, setExerciseData] = useState<
+    {
+      id: number;
+      dayId: number;
+      exerciseType: string;
+      duration: number;
+      caloriesBurned: number;
+    }[]
+  >();
+  useEffect(() => {
+    if (dayData) {
+      (async () => {
+        const fetchedMeals = await db
+          .select()
+          .from(meal)
+          .where(eq(meal.dayId, dayData.id));
+        const fetchedExercises = await db
+          .select()
+          .from(exercise)
+          .where(eq(exercise.dayId, dayData.id));
+        setMealsData(fetchedMeals);
+        setExerciseData(fetchedExercises);
+      })();
+    }
+  }, [dayData]);
 
-  // console.log(mealsData);
-
-  if (!dayData && userData) {
-    createNewDay(userData, today);
-  }
-  // console.log(dayData);
-  // console.log(userData);
   if (userData && dayData && mealsData && exerciseData) {
+    // console.log(dayData);
     return (
       <DayContext.Provider value={dayData}>
         <View style={homeStyles.container}>
@@ -51,17 +69,6 @@ export default function Index() {
               <Exercises exerciseData={exerciseData} />
             </View>
           </View>
-          {/* <Pressable
-          style={{ backgroundColor: 'grey', padding: 15 }}
-          onPress={async () => {
-            await db.delete(day);
-            await db.delete(user);
-            setReset(true);
-          }}
-        >
-          <Text style={{ color: '#fff' }}>Delete Data</Text>
-        </Pressable>
-        {reset && <Redirect href={'/'} />} */}
         </View>
       </DayContext.Provider>
     );
