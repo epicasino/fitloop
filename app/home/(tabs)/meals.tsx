@@ -21,6 +21,14 @@ export default function MealsPage() {
   const today = new Date().toDateString();
   const [modal, setModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(today);
+  const [editMealData, setEditMealData] = useState<{
+    id: number;
+    title: string;
+    time: string;
+    calories: number;
+    notes: string | null;
+    dayId: number;
+  }>();
   const [dayData, setDayData] = useState<{
     date: string;
     id: number;
@@ -35,7 +43,7 @@ export default function MealsPage() {
       time: string;
       calories: number;
       notes: string | null;
-      dayId: number | null;
+      dayId: number;
     }[]
   >();
 
@@ -78,7 +86,12 @@ export default function MealsPage() {
           }}
           transparent={true}
         >
-          <ModalContent setModal={setModal} dayData={dayData} />
+          <ModalContent
+            setModal={setModal}
+            dayData={dayData}
+            editMealData={editMealData}
+            setEditMealData={setEditMealData}
+          />
         </Modal>
         <Header date={selectedDate} />
         <WeekSpread
@@ -93,10 +106,11 @@ export default function MealsPage() {
           meals={mealsData.length}
         />
         <NewMealBtn setModal={setModal} />
-        <LoggedMeals />
-        <Text style={{ color: '#fff' }}>
-          {dayData.date} Meals: {mealsData.length}
-        </Text>
+        <LoggedMeals
+          mealsData={mealsData}
+          setEditMealData={setEditMealData}
+          setModal={setModal}
+        />
       </View>
     );
   } else return <View style={mealsPageStyles.container}></View>;

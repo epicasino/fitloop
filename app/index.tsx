@@ -12,14 +12,14 @@ const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 
 const db = drizzle(expo);
 
-async function clearData() {
-  // await db.delete(user);
-  await db.delete(day);
-  await db.delete(meal);
-}
+// async function clearData() {
+//   await db.delete(user);
+// await db.delete(day);
+// await db.delete(meal);
+// }
 
 export default function App() {
-  clearData();
+  // clearData();
 
   const today = new Date().toDateString();
   const { success, error } = useMigrations(db, migrations);

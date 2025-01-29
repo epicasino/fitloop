@@ -57,4 +57,24 @@ export const mealsPageStyles = StyleSheet.create({
     color: '#fff',
     fontSize: 22,
   },
+  loggedMealsContainer: {
+    alignItems: 'center',
+    height: 250,
+  },
+  loggedMealsHeaderText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 24,
+    paddingBottom: 20,
+  },
+  loggedMealsCard: {
+    backgroundColor: '#202020',
+    flexDirection: 'row',
+    width: '100%',
+    height: 80,
+    borderRadius: 15,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+  },
 });

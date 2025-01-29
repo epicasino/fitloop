@@ -64,6 +64,20 @@
       "when": 1737763468601,
       "tag": "0008_tiny_jimmy_woo",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1738108089178,
+      "tag": "0009_clear_dazzler",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1738108543909,
+      "tag": "0010_loud_mulholland_black",
+      "breakpoints": true
     }
   ]
 }

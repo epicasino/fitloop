@@ -74,7 +74,7 @@ export default function ModalMealType({
             setMealType('other');
           }}
         >
-          <Text style={mealsPageStyles.modalBtnText}>🍦 Other</Text>
+          <Text style={mealsPageStyles.modalBtnText}>🍎 Other</Text>
         </Pressable>
       </View>
     </View>

@@ -57,7 +57,7 @@ export default function Index() {
   }, [dayData]);
 
   if (userData && dayData && mealsData && exerciseData) {
-    // console.log(dayData);
+    // console.log(mealsData);
     return (
       <DayContext.Provider value={dayData}>
         <View style={homeStyles.container}>
