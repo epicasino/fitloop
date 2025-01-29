@@ -16,11 +16,12 @@ export default function Meals({
     calories: number;
     title: string;
     notes: string | null;
-    dayId: number | null;
+    dayId: number;
   }[];
 }) {
   const dayId = useContext(DayContext);
   const router = useRouter();
+  console.log(mealsData);
   return (
     dayId && (
       <View style={mealsAndExerciseStyles.container}>
@@ -29,7 +30,11 @@ export default function Meals({
           calorieIntake={dayId.calorieIntake}
           calorieTarget={Math.floor(dayId.calorieTarget)}
         />
-        {mealsData.length > 1 ? <LatestMeal /> : <Text>No Meals Logged!</Text>}
+        {mealsData.length > 0 ? (
+          <LatestMeal meal={mealsData.pop()} />
+        ) : (
+          <Text>No Meals Logged!</Text>
+        )}
         <Pressable
           style={{
             position: 'absolute',
