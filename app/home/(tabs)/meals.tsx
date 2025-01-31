@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite';
 import React, { useEffect, useState } from 'react';
-import { Modal, Text, View } from 'react-native';
+import { Modal, View } from 'react-native';
 import ProgressBar from '@/components/meals/ProgressBar';
 import NewMealBtn from '@/components/meals/NewMealBtn';
 import ModalContent from '@/components/meals/modal/ModalContent';
@@ -58,7 +58,7 @@ export default function MealsPage() {
       setDayData(fetchedDay);
     };
     generateDayData();
-  }, [selectedDate, modal]);
+  }, [selectedDate, modal, userData]);
 
   useEffect(() => {
     const generateMealData = async () => {

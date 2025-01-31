@@ -13,7 +13,7 @@ const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 const db = drizzle(expo);
 
 // async function clearData() {
-//   await db.delete(user);
+// await db.delete(user);
 // await db.delete(day);
 // await db.delete(meal);
 // }

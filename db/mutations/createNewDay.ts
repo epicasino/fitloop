@@ -38,7 +38,7 @@ const createNewDay = async (
     calorieTarget,
     userId: userData.id,
     db,
-  }).then(data => data && data[0]);
+  }).then((data) => data && data[0]);
   return createdDay;
 };
 

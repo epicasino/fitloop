@@ -19,16 +19,16 @@ export default function Meals({
     dayId: number;
   }[];
 }) {
-  const dayId = useContext(DayContext);
+  const dayData = useContext(DayContext);
   const router = useRouter();
-  console.log(mealsData);
+  // console.log(mealsData);
   return (
-    dayId && (
+    dayData && (
       <View style={mealsAndExerciseStyles.container}>
         <Text style={mealsAndExerciseStyles.header}>Meals</Text>
         <CurrentCalories
-          calorieIntake={dayId.calorieIntake}
-          calorieTarget={Math.floor(dayId.calorieTarget)}
+          calorieIntake={dayData.calorieIntake}
+          calorieTarget={Math.floor(dayData.calorieTarget)}
         />
         {mealsData.length > 0 ? (
           <LatestMeal meal={mealsData.pop()} />

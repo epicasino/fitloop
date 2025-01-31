@@ -57,11 +57,12 @@ export default function Index() {
   }, [dayData]);
 
   if (userData && dayData && mealsData && exerciseData) {
+    // console.log(dayData);
     // console.log(mealsData);
     return (
       <DayContext.Provider value={dayData}>
         <View style={homeStyles.container}>
-          <Header name={userData.name} />
+          <Header userData={userData} dayData={dayData} />
           <StatusMessage />
           <View>
             <View style={{ width: '100%', flexDirection: 'row', gap: 20 }}>

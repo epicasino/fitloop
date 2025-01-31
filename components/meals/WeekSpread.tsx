@@ -1,5 +1,5 @@
 import CircleSvg from '@/assets/svg/shapes/Circle';
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View, Pressable } from 'react-native';
 import { mealsPageStyles } from './styles/styles';
 import useWeekColors from '@/hooks/useWeekColors';

@@ -23,7 +23,8 @@ export const day = sqliteTable('days_table', {
   date: text().notNull(),
   calorieTarget: int().notNull(),
   calorieIntake: int().notNull(),
-  userId: int(),
+  weight: int(),
+  userId: int().notNull(),
 });
 
 export const dayRelations = relations(day, ({ one, many }) => ({
